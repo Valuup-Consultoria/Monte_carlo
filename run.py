@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 FILE_PATH = "di1v24.xlsx" 
 DAYS = 172
 TRIALS = 100000
-EBITDA = 25451101.50
+EBITDA = 26019387.97
 
 def load_and_clean_data(file_path): # Load and clean data
     df = pd.read_excel(file_path)
@@ -61,13 +61,13 @@ def plot(df):
 def main():
     df = load_and_clean_data(FILE_PATH)
     log_returns = calculate_log_returns(df)
-    plot_distribution(log_returns)
+#    plot_distribution(log_returns)
     drift, stdev = calculate_parameters(log_returns)
     daily_returns = simulate_monte_carlo(drift, stdev, DAYS, TRIALS)
     price_paths = calculate_future_prices(daily_returns, df, DAYS)
     df4 = calculate_cumulative_product(price_paths)
     print(f'EBITDA {df4.iloc[-1,-1]}')
-    plot(df4)
+#    plot(df4)
 
 if __name__ == "__main__":
     main()
